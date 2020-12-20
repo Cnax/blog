@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>短信消息模板配置 | cnax&#39;s work experiences</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近系统中需要做一个短信消息配置的功能。实际效果如下：  可以看到整体分三块：右侧是标签列表区，左侧又分上下两块：上面是可以消息模板编辑区，下面是预览当前已经配置好的短信消息。需求：消息模板编辑区可以输入文本，并且如果鼠标焦点在编辑区域内，再去点击右侧标签，将被点击的标签插入进消息文本中，预览区域需要实时显示当前模板的消息。 技术分析拆解功能：  需求中有需要编辑的功能，不涉及富文本，另外产品希望">
+<meta property="og:type" content="article">
+<meta property="og:title" content="短信消息模板配置">
+<meta property="og:url" content="http://ax-jun.gitee.io/blog/2020/12/02/message-template-creator/">
+<meta property="og:site_name" content="cnax&#39;s work experiences">
+<meta property="og:description" content="最近系统中需要做一个短信消息配置的功能。实际效果如下：  可以看到整体分三块：右侧是标签列表区，左侧又分上下两块：上面是可以消息模板编辑区，下面是预览当前已经配置好的短信消息。需求：消息模板编辑区可以输入文本，并且如果鼠标焦点在编辑区域内，再去点击右侧标签，将被点击的标签插入进消息文本中，预览区域需要实时显示当前模板的消息。 技术分析拆解功能：  需求中有需要编辑的功能，不涉及富文本，另外产品希望">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgkr2.cn-bj.ufileos.com/570fa471-8d05-457d-809b-ab52611185e2.gif?UCloudPublicKey=TOKEN_8d8b72be-579a-4e83-bfd0-5f6ce1546f13&Signature=lOfRATQVzaeGrJzZv6%252FBhaiBUu8%253D&Expires=1606975886">
+<meta property="article:published_time" content="2020-12-02T08:01:36.000Z">
+<meta property="article:modified_time" content="2020-12-20T02:41:18.699Z">
+<meta property="article:author" content="cnax">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgkr2.cn-bj.ufileos.com/570fa471-8d05-457d-809b-ab52611185e2.gif?UCloudPublicKey=TOKEN_8d8b72be-579a-4e83-bfd0-5f6ce1546f13&Signature=lOfRATQVzaeGrJzZv6%252FBhaiBUu8%253D&Expires=1606975886">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">cnax&#39;s work experiences</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/categories/Vuejs/">Vuejs</a>
+        
+          <a class="main-nav-link" href="/blog/categories/Reactjs/">Reactjs</a>
+        
+          <a class="main-nav-link" href="/blog/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ax-jun.gitee.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-message-template-creator" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/12/02/message-template-creator/" class="article-date">
+  <time datetime="2020-12-02T08:01:36.000Z" itemprop="datePublished">2020-12-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/Vuejs/">Vuejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      短信消息模板配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近系统中需要做一个短信消息配置的功能。实际效果如下：</p>
+<p><img src="https://imgkr2.cn-bj.ufileos.com/570fa471-8d05-457d-809b-ab52611185e2.gif?UCloudPublicKey=TOKEN_8d8b72be-579a-4e83-bfd0-5f6ce1546f13&Signature=lOfRATQVzaeGrJzZv6%252FBhaiBUu8%253D&Expires=1606975886" alt="效果图"></p>
+<p>可以看到整体分三块：<br>右侧是标签列表区，左侧又分上下两块：上面是可以消息模板编辑区，下面是预览当前已经配置好的短信消息。<br>需求：<br>消息模板编辑区可以输入文本，并且如果鼠标焦点在编辑区域内，再去点击右侧标签，将被点击的标签插入进消息文本中，预览区域需要实时显示当前模板的消息。</p>
+<h3 id="技术分析"><a href="#技术分析" class="headerlink" title="技术分析"></a>技术分析</h3><p>拆解功能：</p>
+<ul>
+<li>需求中有需要编辑的功能，不涉及富文本，另外产品希望用户如果复制可编辑区域内的文本，只能复制纯的文本，那我们可以使用可编辑的div来做，给div加上一个css样式：<code>user-modify: read-write-plaintext-only</code>。这个css样式代码可以使div表现的和textarea一样可以编辑，并且复制出来的内容只会是纯文本。<br>具体的<code>user-modify</code>可以参考 <a target="_blank" rel="noopener" href="https://www.zhangxinxu.com/wordpress/2016/01/contenteditable-plaintext-only/">https://www.zhangxinxu.com/wordpress/2016/01/contenteditable-plaintext-only/</a></li>
+<li>鼠标光标在编辑区域内，点击标签，将标签插入编辑区域内的文本中，这里涉及到一个不常用的 <code>DOM api：selectionchange</code>。</li>
+<li>在标签被点击后，标签插入编辑区域的文本中后，标签中的文字不能被选中，只能整体选中这个标签，并且在按 <code>Backspace</code>键 删除时，删除的应该是整个标签。</li>
+</ul>
+<h3 id="页面框架布局"><a href="#页面框架布局" class="headerlink" title="页面框架布局"></a>页面框架布局</h3><p>左右两个div区分开，左侧主要是两个功能区，一个<code>class=&quot;msg-tpl-ctor-input&quot;</code>的可编辑区域，一个<code>class=&quot;msg-tpl-ctor-view&quot;</code>的实时预览区域，右侧标签选择区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;msg-tpl-ctor&quot; ref&#x3D;&quot;msgTplCtor&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;left&quot;&gt;</span><br><span class="line">    &lt;p&gt;编辑区域：&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;div</span><br><span class="line">      class&#x3D;&quot;msg-tpl-ctor-input&quot;</span><br><span class="line">      ref&#x3D;&quot;msgTplCtorContent&quot;</span><br><span class="line">      :id&#x3D;&quot;contentId&quot;</span><br><span class="line">      @input&#x3D;&quot;handleInput&quot;</span><br><span class="line">    &#x2F;&gt;</span><br><span class="line">    &lt;p&gt;预览区域： &lt;&#x2F;p&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;msg-tpl-ctor-view&quot;&gt;</span><br><span class="line">      &#123;&#123; viewContent &#125;&#125;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;right&quot;&gt;</span><br><span class="line">    &lt;p&gt;标签列表：&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;msg-tpl-ctor-tools&quot;&gt;</span><br><span class="line">      &lt;button</span><br><span class="line">        v-for&#x3D;&quot;item in tagList&quot;</span><br><span class="line">        :key&#x3D;&quot;item&quot;</span><br><span class="line">        class&#x3D;&quot;btn&quot;</span><br><span class="line">        @click&#x3D;&quot;addTag(item)&quot;</span><br><span class="line">      &gt;&#123;&#123; item &#125;&#125;&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>样式代码：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tag-input</span> &#123;</span><br><span class="line">  <span class="attribute">cursor</span>: default <span class="meta">!important</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#ecf5ff</span>;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#409eff</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">outline</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$borderColor</span>: <span class="number">#dcdfe6</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.msg-tpl-ctor</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="selector-class">.left</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-class">.right</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">18%</span>;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">15px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;-<span class="selector-tag">input</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="variable">$borderColor</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">    <span class="attribute">word-break</span>: break-word;</span><br><span class="line">    <span class="comment">// 允许编辑，禁止富文本</span></span><br><span class="line">    -webkit-user-modify: read-write-plaintext-only <span class="meta">!important</span>;</span><br><span class="line">    -moz-user-modify: read-write-plaintext-only <span class="meta">!important</span>;</span><br><span class="line">    -ms-user-modify: read-write-plaintext-only <span class="meta">!important</span>;</span><br><span class="line">    &amp;<span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">      <span class="attribute">outline</span>: none;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;-view &#123;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">15px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="variable">$borderColor</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">    <span class="attribute">word-break</span>: break-word;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;-tools &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="variable">$borderColor</span>;</span><br><span class="line">    <span class="selector-class">.btn</span> &#123;</span><br><span class="line">      <span class="attribute">display</span>: inline-block;</span><br><span class="line">      <span class="attribute">line-height</span>: <span class="number">1</span>;</span><br><span class="line">      <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">      <span class="attribute">cursor</span>: pointer;</span><br><span class="line">      <span class="attribute">background</span>: <span class="number">#FFF</span>;</span><br><span class="line">      <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#DCDFE6</span>;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#606266</span>;</span><br><span class="line">      -webkit-appearance: none;</span><br><span class="line">      <span class="attribute">text-align</span>: center;</span><br><span class="line">      -webkit-<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">      <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">      <span class="attribute">outline</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">margin</span>: <span class="number">5px</span>;</span><br><span class="line">      -webkit-<span class="attribute">transition</span>: .<span class="number">1s</span>;</span><br><span class="line">      <span class="attribute">transition</span>: .<span class="number">1s</span>;</span><br><span class="line">      <span class="attribute">font-weight</span>: <span class="number">500</span>;</span><br><span class="line">      -moz-user-<span class="selector-tag">select</span>: none;</span><br><span class="line">      -webkit-user-<span class="selector-tag">select</span>: none;</span><br><span class="line">      -ms-user-<span class="selector-tag">select</span>: none;</span><br><span class="line">      <span class="attribute">padding</span>: <span class="number">9px</span> <span class="number">15px</span>;</span><br><span class="line">      <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">      <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">      &amp;<span class="selector-pseudo">:focus</span>, &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: <span class="number">#409EFF</span>;</span><br><span class="line">        <span class="attribute">border-color</span>: <span class="number">#c6e2ff</span>;</span><br><span class="line">        <span class="attribute">background-color</span>: <span class="number">#ecf5ff</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      &amp;<span class="selector-pseudo">:active</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: <span class="number">#3a8ee6</span>;</span><br><span class="line">        <span class="attribute">border-color</span>: <span class="number">#3a8ee6</span>;</span><br><span class="line">        <span class="attribute">outline</span>: <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="处理逻辑"><a href="#处理逻辑" class="headerlink" title="处理逻辑"></a>处理逻辑</h3><p>重点：</p>
+<ul>
+<li>为了解决 ‘标签插入编辑区域的文本中后，标签中的文字不能被选中，只能整体选中这个标签，并且在按 <code>Backspace</code>键 删除时，删除的应该是整个标签。’ 这个问题，我们发现用<code>&lt;input type=&quot;button&quot; /&gt;</code>， 通过修改样式的方式能够很好的解决，满足需求。</li>
+<li>鼠标光标的问题，参考 <code>MDN</code> 中 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Document/selectionchange_event">selectionchange</a></li>
+</ul>
+<p>页面逻辑代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  按照一定格式将html转成纯文本</span></span><br><span class="line"><span class="comment"> * eg:</span></span><br><span class="line"><span class="comment"> *   &lt;input type=&quot;button&quot; class=&quot;tag-input&quot; readonly=&quot;true&quot; value=&quot;法院名称&quot;/&gt;这是文本</span></span><br><span class="line"><span class="comment"> *   =&gt;</span></span><br><span class="line"><span class="comment"> *   [法院名称]这是文本</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">html2Text</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.replace(<span class="regexp">/\&lt;input([^\&gt;]+)\&gt;/g</span>, <span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> divNode = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">    divNode.innerHTML = item</span><br><span class="line">    <span class="built_in">console</span>.log(item, divNode)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`[<span class="subst">$&#123;divNode.firstChild.value&#125;</span>]`</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成随机的长度为10的字符串</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUuid</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.random().toString(<span class="number">36</span>).substr(<span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">&#x27;MessageTemplateCreator&#x27;</span>,</span><br><span class="line">  props: &#123;</span><br><span class="line">    value: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    tagList: &#123;</span><br><span class="line">      type: <span class="built_in">Array</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="function">() =&gt;</span> []</span><br><span class="line">    &#125;,</span><br><span class="line">    tagInputCls: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">// 记录currentText以计算长度</span></span><br><span class="line">      currentText: <span class="built_in">this</span>.value,</span><br><span class="line">      <span class="comment">// 为input区域生成随机id，当在页面上有多个组件时，用于监听光标的变化</span></span><br><span class="line">      contentId: <span class="string">`content<span class="subst">$&#123;getUuid()&#125;</span>`</span>,</span><br><span class="line">      savedRange: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    viewContent () &#123;</span><br><span class="line">      <span class="keyword">return</span> html2Text(<span class="built_in">this</span>.value)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="comment">// 初始化数据，将从props中传进来的value（首次进入时赋值给了currentText）值初始化到编辑区域内</span></span><br><span class="line">    <span class="built_in">this</span>.currentText &amp;&amp; (<span class="built_in">this</span>.$refs.msgTplCtorContent.innerHTML = <span class="built_in">this</span>.currentText)</span><br><span class="line">    <span class="comment">// 监听document中文本的选择变化</span></span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">&#x27;selectionchange&#x27;</span>, <span class="built_in">this</span>.handleSelect)</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeDestroy () &#123;</span><br><span class="line">    <span class="comment">// 卸载事件</span></span><br><span class="line">    <span class="built_in">document</span>.removeEventListener(<span class="string">&#x27;selectionchange&#x27;</span>, <span class="built_in">this</span>.handleSelect)</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    addTag (text) &#123;</span><br><span class="line">      <span class="comment">// 点击标签时，创建一个button类型的input节点，添加相应的样式，并将标签的文本作为值挂载到input的value属性上，最后将此input节点插入进文本</span></span><br><span class="line">      <span class="keyword">const</span> node = <span class="built_in">document</span>.createElement(<span class="string">&#x27;input&#x27;</span>)</span><br><span class="line">      node.setAttribute(<span class="string">&#x27;type&#x27;</span>, <span class="string">&#x27;button&#x27;</span>)</span><br><span class="line">      node.setAttribute(<span class="string">&#x27;class&#x27;</span>, <span class="built_in">this</span>.tagInputCls ? <span class="string">`tag-input <span class="subst">$&#123;<span class="built_in">this</span>.tagInputCls&#125;</span>`</span> : <span class="string">&#x27;tag-input&#x27;</span>)</span><br><span class="line">      node.setAttribute(<span class="string">&#x27;readonly&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">      node.setAttribute(<span class="string">&#x27;value&#x27;</span>, text)</span><br><span class="line">      <span class="built_in">this</span>.insertNode(node)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 在内容中插入标签</span></span><br><span class="line">    insertNode (node) &#123;</span><br><span class="line">      <span class="comment">// 删掉选中的内容（如有）</span></span><br><span class="line">      <span class="built_in">this</span>.savedRange.deleteContents()</span><br><span class="line">      <span class="comment">// 插入标签</span></span><br><span class="line">      <span class="built_in">this</span>.savedRange.insertNode(node)</span><br><span class="line">      <span class="comment">// 更新双向绑定数据</span></span><br><span class="line">      <span class="keyword">let</span> target = <span class="built_in">this</span>.$refs.msgTplCtorContent</span><br><span class="line">      <span class="built_in">this</span>.updateData(target.innerHTML)</span><br><span class="line">      <span class="built_in">this</span>.currentText = target.innerText</span><br><span class="line">    &#125;,</span><br><span class="line">    updateData (text) &#123;</span><br><span class="line">      <span class="built_in">this</span>.$emit(<span class="string">&#x27;input&#x27;</span>, text)</span><br><span class="line">    &#125;,</span><br><span class="line">    handleSelect () &#123;</span><br><span class="line">      <span class="comment">// 监听选定文本的变动</span></span><br><span class="line">      <span class="keyword">let</span> sel = <span class="built_in">document</span>.getSelection()</span><br><span class="line">      <span class="keyword">let</span> range = sel.rangeCount &gt; <span class="number">0</span> ? sel.getRangeAt(<span class="number">0</span>) : <span class="literal">null</span></span><br><span class="line">      <span class="comment">// 监听到选中的文本在编辑区域内</span></span><br><span class="line">      <span class="keyword">if</span> (</span><br><span class="line">        range &amp;&amp;</span><br><span class="line">        range.commonAncestorContainer.ownerDocument.activeElement.id ===</span><br><span class="line">        <span class="built_in">this</span>.contentId</span><br><span class="line">      ) &#123;</span><br><span class="line">        <span class="built_in">this</span>.savedRange = range</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    handleInput (e) &#123;</span><br><span class="line">      <span class="built_in">this</span>.updateData(e.target.innerHTML)</span><br><span class="line">      <span class="built_in">this</span>.currentText = e.target.innerText</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>以上为全部代码。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <!-- <a data-url="http://ax-jun.gitee.io/blog/2020/12/02/message-template-creator/" data-id="ckiwj8v740001ngul7oskdaun" class="article-share-link">Share</a> -->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/12/01/react-stop-propagation/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">react中阻止事件冒泡</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/loading/" rel="tag">loading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/npx/" rel="tag">npx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/nrm/" rel="tag">nrm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="tag">生命周期</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E9%92%89%E9%92%89%E8%B0%83%E8%AF%95/" rel="tag">钉钉调试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E9%98%BB%E6%AD%A2%E5%86%92%E6%B3%A1/" rel="tag">阻止冒泡</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/12/">十二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/12/02/message-template-creator/">短信消息模板配置</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/12/01/react-stop-propagation/">react中阻止事件冒泡</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/12/01/vue-lifecycle/">vue父子组件生命周期执行顺序</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/12/01/dingding-devtools-MUMU/">win10 系统中使用网易MuMu模拟器调试钉钉微应用</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/12/01/git-ssh/">git-ssh 的使用配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 cnax<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/categories/Vuejs/" class="mobile-nav-link">Vuejs</a>
+  
+    <a href="/blog/categories/Reactjs/" class="mobile-nav-link">Reactjs</a>
+  
+    <a href="/blog/categories/%E5%B7%A5%E5%85%B7/" class="mobile-nav-link">工具</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
